@@ -64,6 +64,10 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glide_version"
     kapt "com.github.bumptech.glide:annotations:$glide_version"
     implementation "com.github.bumptech.glide:okhttp3-integration:$glide_version"
+    // Paging
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    // alternatively - without Android dependencies for tests
+    testImplementation "androidx.paging:paging-common:$paging_version"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

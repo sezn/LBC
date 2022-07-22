@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class AlbumsRepository @Inject constructor(private val apiService: APIService) {
 
-    val albums = MutableLiveData<List<Album>>()
+    val albums = mutableListOf<Album>()
 
     init {
 
@@ -23,7 +23,7 @@ class AlbumsRepository @Inject constructor(private val apiService: APIService) {
             }
             .onSuccess {
                 Log.w(TAG, "Success while get Albums ${it.size} ${it[0].title}")
-                albums.value = it
+                albums.addAll(it)
             }
     }
 

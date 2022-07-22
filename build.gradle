@@ -5,6 +5,7 @@ buildscript {
         hilt_version = "2.42"
         glide_version = "4.13.2"
         okhttp_version = "4.10.0"
+        paging_version = "3.1.1"
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"

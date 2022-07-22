@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.szn.lbc.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainFragment: Fragment() {
@@ -25,16 +28,19 @@ class MainFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        mAdapter = AlbumsAdapter(viewModel.albums)
+        mAdapter = AlbumsAdapter()
 
         binding.recycler.layoutManager = LinearLayoutManager(context)
 
-        viewModel.albums.observe(viewLifecycleOwner) {
-            Log.w(TAG, "observe ${it.size}")
-            mAdapter = AlbumsAdapter(it)
-            binding.recycler.adapter = mAdapter
-        }
+        binding.recycler.adapter = mAdapter
 
+        lifecycleScope.launch{
+            viewModel.flow.collect {
+                delay(2000)
+                Log.e(TAG, "submit data ")
+                mAdapter.submitData(it)
+            }
+        }
 
     }
 
