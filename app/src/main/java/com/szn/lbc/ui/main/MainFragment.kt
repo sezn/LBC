@@ -26,9 +26,7 @@ class MainFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        mAdapter = AlbumsAdapter(viewModel.albums)
-        viewModel.let {
-            Log.w(TAG, "onView viewModel")
-        }
+
         binding.recycler.layoutManager = LinearLayoutManager(context)
 
         viewModel.albums.observe(viewLifecycleOwner) {

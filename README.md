@@ -12,6 +12,9 @@
 ### Persistance:
     Room
 
+### UI:
+    Paging library: there is a lot of results, so will encaps in Paging library
+
 ## Architecture:
 MVVM
 Need persistance, so the ViewModel will communicate with a Repository wich will call API or load from Room
