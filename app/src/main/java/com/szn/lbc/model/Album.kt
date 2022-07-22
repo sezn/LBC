@@ -6,4 +6,8 @@ data class Album (
 	val title: String,
 	val url: String,
 	val thumbnailUrl: String
-)
+){
+	fun getImage(): String {
+		return "$url.jpg"
+	}
+}
