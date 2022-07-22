@@ -12,8 +12,9 @@
 ### Persistance:
     Room
 
-## Choix Architecture:
-   MVVM
+## Architecture:
+MVVM
+Need persistance, so the ViewModel will communicate with a Repository wich will call API or load from Room
 
 ## Notes From  Client:
 Vous devez réaliser une application native Android affichant la liste des items suivant (titres

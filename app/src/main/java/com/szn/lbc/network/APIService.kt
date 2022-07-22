@@ -7,6 +7,9 @@ import retrofit2.http.GET
 interface APIService {
 
     @GET("img/shared/technical-test.json")
-    suspend fun getAlbums(): Response<List<Album>>
+    suspend fun getAlbums(): Result<List<Album>>
+
+    @GET("img/shared/technical-test.json")
+    suspend fun getAbums(): Response<List<Album>>
 
 }

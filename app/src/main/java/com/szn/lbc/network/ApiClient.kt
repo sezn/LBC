@@ -36,6 +36,7 @@ class ApiClient  {
             .baseUrl(BuildConfig.BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(ResultCallAdapterFactory())
             .build()
     }
 
