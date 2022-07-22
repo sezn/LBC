@@ -1,3 +1,21 @@
+# LBC App Test
+## Need
+   Afficher une liste d'albums
+
+## Libraries:
+### DI:
+    Hilt
+### Network:
+    OKhttp, Retrofit
+### Images:
+    Glide
+### Persistance:
+    Room
+
+## Choix Architecture:
+   MVVM
+
+## Notes From  Client:
 Vous devez réaliser une application native Android affichant la liste des items suivant (titres
 d'albums) : https://static.leboncoin.fr/img/shared/technical-test.json
 
