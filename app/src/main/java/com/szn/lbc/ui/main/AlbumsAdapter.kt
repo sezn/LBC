@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.AsyncPagingDataDiffer
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -45,10 +46,6 @@ class AlbumsAdapter(): PagingDataAdapter<Album, AlbumViewHolder>(AlbumDiffer) {
             } )*/
             .into(holder.img)
     }
-
-    /*override fun getItemCount(): Int {
-        return albums.size
-    }*/
 
     class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTv: TextView = itemView.findViewById(R.id.title_tv)
