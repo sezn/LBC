@@ -70,6 +70,8 @@ dependencies {
     testImplementation "androidx.paging:paging-common:$paging_version"
     implementation "androidx.room:room-paging:$room_version"
 
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
     //Room
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
