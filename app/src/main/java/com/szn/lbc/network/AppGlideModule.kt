@@ -15,7 +15,10 @@ import java.net.CookieHandler
 import java.net.CookieManager
 import java.net.CookiePolicy
 
-
+/**
+ * Glide module implementation
+ * addInterceptor for add Header
+ */
 @GlideModule
 class AppGlideModule: AppGlideModule() {
 
@@ -29,10 +32,9 @@ class AppGlideModule: AppGlideModule() {
             addInterceptor(
                 Interceptor { chain ->
                     val builder = chain.request().newBuilder()
-                    // Dont know why it s not working..
+                    // Dont know why it s not working with http.agent ..
 //                    builder.header("User-Agent", System.getProperty("http.agent"))
                     builder.header("User-Agent", "chelou")
-                    builder.header("Cache-Control", "no-cache")
                     return@Interceptor chain.proceed(builder.build())
                 }
             )

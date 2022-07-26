@@ -1,7 +1,7 @@
 package com.szn.lbc
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.szn.lbc.ui.main.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,4 +18,5 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
         }
     }
+
 }
