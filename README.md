@@ -1,9 +1,9 @@
 # LBC App Test
 ## Need
-   Display an album list
-   Put User-Agent in headers: OkHttpInterceptor or Glide.addHeader
-   Implement a Storage method: Room
-   Not in compose :(
+- Display an album list
+- Put User-Agent in headers: OkHttpInterceptor or Glide.addHeader
+- Implement a Storage method: Room
+- Not in compose :(
 
 ## Libraries:
 ### DI:
