@@ -1,5 +1,6 @@
 package com.szn.lbc.paging
 
+import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -8,6 +9,7 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.szn.lbc.dao.AppDatabase
 import com.szn.lbc.datastore.DataStoreManager
+import com.szn.lbc.extensions.isOnline
 import com.szn.lbc.model.Album
 import com.szn.lbc.network.APIService
 import okio.IOException
@@ -82,10 +84,14 @@ class AlbumRemoteMediator(
     }
 
 
+    /**
+     * check whether cached data is out of date and decide whether to trigger a remote refresh.
+     */
     override suspend fun initialize(): InitializeAction {
         val cacheTimeout = TimeUnit.MILLISECONDS.convert(10, TimeUnit.MINUTES)
         val del = System.currentTimeMillis() - dataStoreManager.lastUpdated()
-        return if (del < cacheTimeout)
+        val network = NetworkCapabilities().isOnline(dataStoreManager.context)
+        return if ((del < cacheTimeout) || !network)
         {
             //Need to refresh cached data
             Log.e("Mediator", "No Need to refresh... $del < $cacheTimeout ")

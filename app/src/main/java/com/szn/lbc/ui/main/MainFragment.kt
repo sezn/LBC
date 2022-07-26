@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.szn.lbc.R
 import com.szn.lbc.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -32,8 +36,12 @@ class MainFragment: Fragment() {
         binding.recycler.layoutManager = LinearLayoutManager(context)
         binding.recycler.adapter = mAdapter
         binding.progress.isVisible = true
+        val divider = DividerItemDecoration(context, RecyclerView.VERTICAL)
+        val shape = ResourcesCompat.getDrawable(context!!.resources, R.drawable.divider_shape, null)
+        divider.setDrawable(shape!!)
+        binding.recycler.addItemDecoration(divider)
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenCreated {
             launch {
                 mAdapter.loadStateFlow.collectLatest { loadStates ->
                     binding.progress.isVisible = loadStates.refresh is LoadState.Loading
@@ -45,7 +53,6 @@ class MainFragment: Fragment() {
                     mAdapter.submitData(it)
                 }
             }
-
         }
 
     }

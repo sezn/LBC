@@ -46,7 +46,7 @@ class AlbumsAdapter(): PagingDataAdapter<Album, AlbumViewHolder>(AlbumDiffer) {
             .into(holder.img)
     }
 
-    class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTv: TextView = itemView.findViewById(R.id.title_tv)
         val img: ImageView = itemView.findViewById(R.id.img_iv)
     }
