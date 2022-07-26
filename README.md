@@ -19,8 +19,11 @@
     Paging library: there is a lot of results, so will encaps in Paging library
 
 ## Architecture:
-MVVM
-Need persistance, so the ViewModel will communicate with a Repository wich will call API and or load from Room
+Implement a MVVM architectur, we need persistance, so the ViewModel will communicate with a Repository wich will call API and or load Datas from Room. 
+The API & Room implementation will be injected by Hilt, we provide implementations in modules.
+
+# Notes Dev: 
+Because there is a lot of items, I tested with simple RecyclerView.Adapter at beginning. But that was laggy, so I decided to test the PagingLibary, and it works fun, even we havent an API who handle Paging.
 
 
 
