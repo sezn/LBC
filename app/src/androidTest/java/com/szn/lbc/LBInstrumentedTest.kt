@@ -24,7 +24,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class LBInstrumentedTest {
 
-    private val DELAY = 2000L
+    private val DELAY = 1000L
 
     @get:Rule
     var activityScenarioRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
@@ -87,4 +87,33 @@ class LBInstrumentedTest {
             delay(DELAY * 2)
         }
     }
+
+
+    @Test
+    fun loadsTheDefaultResults() {
+        onView(ViewMatchers.withId(R.id.recycler)).check { view, noViewFoundException ->
+            if (noViewFoundException != null) {
+                throw noViewFoundException
+            }
+
+            val recyclerView = view as RecyclerView
+            assertTrue(recyclerView.adapter?.itemCount!! > 1)
+        }
+    }
+
+
+    @Test
+    fun loadsTheTestResultsMax() {
+
+        onView(ViewMatchers.withId(R.id.recycler)).check { view, noViewFoundException ->
+            if (noViewFoundException != null) {
+                throw noViewFoundException
+            }
+
+            val recyclerView = view as RecyclerView
+            assertTrue(recyclerView.adapter?.itemCount!! > 1)
+            assertTrue(recyclerView.adapter?.itemCount!! == 5000)
+        }
+    }
+
 }
