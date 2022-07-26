@@ -1,6 +1,9 @@
 # LBC App Test
 ## Need
-   Afficher une liste d'albums
+   Display an album list
+   Put User-Agent in headers: OkHttpInterceptor or Glide.addHeader
+   Implement a Storage method: Room
+   Not in compose :(
 
 ## Libraries:
 ### DI:
@@ -17,7 +20,9 @@
 
 ## Architecture:
 MVVM
-Need persistance, so the ViewModel will communicate with a Repository wich will call API or load from Room
+Need persistance, so the ViewModel will communicate with a Repository wich will call API and or load from Room
+
+
 
 ## Notes From  Client:
 Vous devez réaliser une application native Android affichant la liste des items suivant (titres
