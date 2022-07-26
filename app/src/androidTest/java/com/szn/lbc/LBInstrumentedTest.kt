@@ -1,7 +1,7 @@
 package com.szn.lbc
 
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.PerformException
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -11,6 +11,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,19 +39,11 @@ class LBInstrumentedTest {
     @Test(expected = PerformException::class)
     fun itemWithText_doesNotExist() {
         // Attempt to scroll to an item that contains the special text.
-        Espresso.onView(ViewMatchers.withId(R.id.recycler)) // scrollTo will fail the test if no item matches.
+        onView(ViewMatchers.withId(R.id.recycler)) // scrollTo will fail the test if no item matches.
             .perform(
                 RecyclerViewActions.scrollTo<RecyclerView.ViewHolder>(
                     ViewMatchers.hasDescendant(ViewMatchers.withText("not in the list"))
                 )
-            )
-    }
-
-    @Test
-    fun scrollToTwenty(){
-        Espresso.onView(ViewMatchers.withId(R.id.recycler))
-            .perform(
-                RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(20)
             )
     }
 
@@ -60,24 +53,38 @@ class LBInstrumentedTest {
     @Test
     fun scrollToHugeThenValThenTop(){
         runBlocking {
-            Espresso.onView(ViewMatchers.withId(R.id.recycler))
+            onView(ViewMatchers.withId(R.id.recycler))
                 .perform(
                     RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(Int.MAX_VALUE)
                 )
 
             delay(DELAY)
-            Espresso.onView(ViewMatchers.withId(R.id.recycler))
+            onView(ViewMatchers.withId(R.id.recycler))
                 .perform(
                     RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(100)
                 )
 
             delay(DELAY)
-            Espresso.onView(ViewMatchers.withId(R.id.recycler))
+            onView(ViewMatchers.withId(R.id.recycler))
                 .perform(
                     RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0)
                 )
             delay(DELAY)
         }
 
+    }
+
+    @Test
+    fun scrollToBottom() {
+        runBlocking{
+            delay(DELAY)
+            onView(ViewMatchers.withId(R.id.recycler)).check { view, noViewFoundException ->
+                val recyclerView = view as RecyclerView
+                val count = recyclerView.adapter?.itemCount!!
+                assertTrue(count > 0)
+                recyclerView.scrollToPosition(count - 1)
+            }
+            delay(DELAY * 2)
+        }
     }
 }
