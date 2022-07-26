@@ -20,7 +20,7 @@ class AlbumsRepository @Inject constructor(private val apiService: APIService,
 
     }
 
-    suspend fun loadAlbums(){
+    private suspend fun loadAlbums(){
         apiService.getAlbums()
             .onFailure {
                 Log.e(TAG, "Error while get Albums")
@@ -43,7 +43,6 @@ class AlbumsRepository @Inject constructor(private val apiService: APIService,
             }
         }
     }
-
 
     companion object {
         val TAG = AlbumsRepository::class.java.simpleName
