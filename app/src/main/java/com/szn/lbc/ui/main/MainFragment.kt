@@ -1,7 +1,6 @@
 package com.szn.lbc.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,6 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.szn.lbc.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -23,7 +20,7 @@ class MainFragment: Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentMainBinding
-    private lateinit var mAdapter: AlbumsAdapter
+    private val mAdapter = AlbumsAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMainBinding.inflate(inflater)
@@ -32,25 +29,26 @@ class MainFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mAdapter = AlbumsAdapter()
         binding.recycler.layoutManager = LinearLayoutManager(context)
         binding.recycler.adapter = mAdapter
-
-        lifecycleScope.async{
-            viewModel.flow.collect {
-                mAdapter.submitData(it)
-            }
-        }
+        binding.progress.isVisible = true
 
         lifecycleScope.launch {
-            mAdapter.loadStateFlow.collectLatest { loadStates ->
-            Log.e(TAG, "stateFlow collect $loadStates")
-                binding.progress.isVisible = loadStates.refresh is LoadState.Loading
-             }
+            launch {
+                mAdapter.loadStateFlow.collectLatest { loadStates ->
+                    binding.progress.isVisible = loadStates.refresh is LoadState.Loading
+                }
+            }
+
+            launch {
+                viewModel.flow.collect {
+                    mAdapter.submitData(it)
+                }
+            }
+
         }
 
     }
-
 
     companion object {
         fun newInstance() = MainFragment()

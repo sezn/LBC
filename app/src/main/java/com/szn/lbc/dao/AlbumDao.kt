@@ -16,8 +16,9 @@ interface AlbumDao {
     @Query("SELECT * FROM albums")
     fun getAll(): List<Album>
 
-    @Query("SELECT * FROM albums WHERE title LIKE :query")
-    fun pagingSource(query: String): PagingSource<Int, Album>
+//    @Query("SELECT * FROM albums WHERE title LIKE :query")
+    @Query("SELECT * FROM albums")
+    fun pagingSource(): PagingSource<Int, Album>
 
     @Query("DELETE FROM albums")
     suspend fun clearAll()

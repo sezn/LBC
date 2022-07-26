@@ -3,11 +3,11 @@ package com.szn.lbc.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.szn.lbc.model.Album
-import com.szn.lbc.network.APIService
 import com.szn.lbc.repo.AlbumsRepository
 
 /**
  * PagingSource implementation of [Album]
+ * No need since did AlbumRemoteMediator
  */
 class AlbumsPagingDataSource(private val repository: AlbumsRepository): PagingSource<Int, Album>() {
 
@@ -29,13 +29,10 @@ class AlbumsPagingDataSource(private val repository: AlbumsRepository): PagingSo
         }
     }
 
-
     override fun getRefreshKey(state: PagingState<Int, Album>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)}
     }
-
-
 
 }
