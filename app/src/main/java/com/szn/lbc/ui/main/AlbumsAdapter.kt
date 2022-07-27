@@ -16,8 +16,7 @@ import com.szn.lbc.ui.main.AlbumsAdapter.AlbumViewHolder
 /***
  * Adapter for Display List of Album
  */
-class AlbumsAdapter : PagingDataAdapter<Album, AlbumViewHolder>(AlbumDiffer) {
-
+class AlbumsAdapter(val onItemSelected: OnItemSelectedListener): PagingDataAdapter<Album, AlbumViewHolder>(AlbumDiffer) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): AlbumViewHolder {
         return AlbumViewHolder(LayoutInflater.from(viewGroup.context)
@@ -28,9 +27,13 @@ class AlbumsAdapter : PagingDataAdapter<Album, AlbumViewHolder>(AlbumDiffer) {
         val album = getItem(position)
         holder.titleTv.text = album?.title
 
-       GlideApp.with(holder.itemView)
+        GlideApp.with(holder.itemView)
             .load(album?.url)
             .into(holder.img)
+
+        holder.itemView.setOnClickListener {
+            onItemSelected.onClick(position, album!!)
+        }
     }
 
     inner class AlbumViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -50,3 +53,6 @@ class AlbumsAdapter : PagingDataAdapter<Album, AlbumViewHolder>(AlbumDiffer) {
     }
 }
 
+interface OnItemSelectedListener {
+    fun onClick(position: Int, album: Album)
+}

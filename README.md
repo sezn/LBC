@@ -27,7 +27,10 @@ At the beginning, the Repository call API if need, will load from Db if Datas is
 With the RemoteMediator implementation of PagingSource, this is this RemoteMediator who is responsible to Refresh or Not Datas when Override InitializeAction.  
 
 # Notes Dev: 
-Because there is a lot of items, I tested with simple RecyclerView.Adapter at beginning. But that was laggy, so I decided to test the PagingLibary, and it works fun, even we havent an API who handle Paging.
+Because there is a lot of items, I tested with simple RecyclerView.Adapter at beginning. 
+But that was laggy, so I decided to test the PagingLibary, and it works fun, even we havent an API who handle Paging.
+
+This was not asked to have a detail view, but I did it for show how we could do. And so, I changed to NavHostFragment for show we can hold naviation with a NavGraph.
 
 
 

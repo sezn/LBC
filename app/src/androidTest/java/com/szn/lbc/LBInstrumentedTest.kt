@@ -3,11 +3,13 @@ package com.szn.lbc
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.PerformException
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.szn.lbc.ui.MainActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -138,6 +140,20 @@ class LBInstrumentedTest {
             assertTrue(recyclerView.adapter?.itemCount!! > 1)
             assertTrue(recyclerView.adapter?.itemCount!! == 5000)
         }
+    }
+
+    @Test
+    fun loadDetail(){
+        runBlocking {
+            onView(ViewMatchers.withId(R.id.recycler))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
+            delay(DELAY)
+            onView(ViewMatchers.withId(R.id.img_iv))
+                .check{ view, noViewFoundException ->
+                    assert(view != null)
+                }
+        }
+
     }
 
 }

@@ -8,6 +8,7 @@ buildscript {
         paging_version = "3.1.1"
         room_version = "2.4.2"
         espresso_version = "3.4.0"
+        nav_version = "2.5.0"
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"

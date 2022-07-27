@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LBC</string>
+    <string name="home">Accueil</string>
+    <string name="album">Album</string>
 </resources>

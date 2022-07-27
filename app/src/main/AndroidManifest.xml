@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.LBC">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>
