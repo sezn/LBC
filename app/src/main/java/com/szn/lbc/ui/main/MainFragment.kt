@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.szn.lbc.R
 import com.szn.lbc.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -53,6 +54,11 @@ class MainFragment: Fragment() {
                     mAdapter.submitData(it)
                 }
             }
+        }
+
+        lifecycleScope.launch {
+            delay(4000)
+            binding.recycler.scrollToPosition(4000)
         }
 
     }

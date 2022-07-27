@@ -88,6 +88,30 @@ class LBInstrumentedTest {
         }
     }
 
+    @Test
+    fun scrollAnScroll() {
+        runBlocking{
+            delay(DELAY)
+            val v = onView(ViewMatchers.withId(R.id.recycler))
+            v.check { view, noViewFoundException ->
+                val recyclerView = view as RecyclerView
+                val count = recyclerView.adapter?.itemCount!!
+                assertTrue(count > 0)
+                recyclerView.scrollToPosition(count - 1)
+            }
+            delay(DELAY * 2)
+            v.check{ view, noViewFoundException ->
+                val recyclerView = view as RecyclerView
+                val count = recyclerView.adapter?.itemCount!!
+                assertTrue(count > 1)
+                recyclerView.scrollToPosition(count-1)
+                recyclerView.scrollToPosition(1)
+                recyclerView.scrollToPosition(count)
+                recyclerView.scrollToPosition(count / 2)
+            }
+        }
+    }
+
 
     @Test
     fun loadsTheDefaultResults() {

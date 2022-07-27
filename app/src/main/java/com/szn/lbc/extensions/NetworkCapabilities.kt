@@ -9,7 +9,7 @@ import android.util.Log
  * Check if have network
  * from: https://stackoverflow.com/questions/51141970/check-internet-connectivity-android-in-kotlin
  */
-fun NetworkCapabilities.isOnline(context: Context): Boolean {
+fun isOnline(context: Context): Boolean {
     val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     if (connectivityManager != null) {
