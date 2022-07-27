@@ -23,6 +23,7 @@ class MainActivity: AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+        // So for Detail it will show the Back Button
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home

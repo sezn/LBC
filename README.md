@@ -17,6 +17,10 @@
 
 ### UI:
     Paging library: there is a lot of results, so will encaps in Paging library
+    Navigation Component
+
+### Tests:
+    JUnit, Espresso
 
 ## Architecture:
 Implement a MVVM architecture, we need persistance, so the ViewModel will communicate with a Repository wich will call API and or load Datas from Room. 
