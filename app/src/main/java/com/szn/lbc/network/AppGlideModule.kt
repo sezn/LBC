@@ -8,12 +8,8 @@ import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
 import okhttp3.Interceptor
-import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import java.io.InputStream
-import java.net.CookieHandler
-import java.net.CookieManager
-import java.net.CookiePolicy
 
 /**
  * Glide module implementation
@@ -23,16 +19,12 @@ import java.net.CookiePolicy
 class AppGlideModule: AppGlideModule() {
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
-        val cookieManager = CookieManager()
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
-        CookieHandler.setDefault(cookieManager)
 
         val okHttpClient = OkHttpClient.Builder().apply {
-            cookieJar(JavaNetCookieJar(cookieManager))
             addInterceptor(
                 Interceptor { chain ->
                     val builder = chain.request().newBuilder()
-                    // Dont know why it s not working with http.agent ..
+                    // Dont know why it s not working with Device's http.agent ..
 //                    builder.header("User-Agent", System.getProperty("http.agent"))
                     builder.header("User-Agent", "chelou")
                     return@Interceptor chain.proceed(builder.build())

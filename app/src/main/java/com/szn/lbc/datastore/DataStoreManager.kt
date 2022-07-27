@@ -60,7 +60,7 @@ class DataStoreManager(val context: Context) {
 
     suspend fun lastUpdated(): Long {
         val up = getValue(LAST_UPDATE)
-        return up?.toString()?.toLong() ?: 0
+        return up?.toString()?.toLong()?: 0
     }
 
     companion object {
