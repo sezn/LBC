@@ -13,10 +13,15 @@ interface AlbumDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(albums: List<Album>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(album: Album)
+
     @Query("SELECT * FROM albums")
     fun getAll(): List<Album>
 
-//    @Query("SELECT * FROM albums WHERE title LIKE :query")
+    @Query("SELECT * FROM albums WHERE title LIKE :query")
+    fun getByTitle(query: String): List<Album>
+
     @Query("SELECT * FROM albums")
     fun pagingSource(): PagingSource<Int, Album>
 

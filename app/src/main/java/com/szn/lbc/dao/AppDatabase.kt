@@ -6,7 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.szn.lbc.model.Album
 
-
+/**
+ * RoomDatabase implementation
+ */
 @Database(entities = [Album::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
 

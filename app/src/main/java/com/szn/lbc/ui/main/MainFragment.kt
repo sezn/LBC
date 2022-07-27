@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.szn.lbc.R
 import com.szn.lbc.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * Fragment responsible for Display the RecyclerView
+ */
 @AndroidEntryPoint
 class MainFragment: Fragment() {
 
@@ -55,12 +57,6 @@ class MainFragment: Fragment() {
                 }
             }
         }
-
-        lifecycleScope.launch {
-            delay(4000)
-            binding.recycler.scrollToPosition(4000)
-        }
-
     }
 
     companion object {

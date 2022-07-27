@@ -13,11 +13,10 @@ import com.szn.lbc.model.Album
 import com.szn.lbc.network.GlideApp
 import com.szn.lbc.ui.main.AlbumsAdapter.AlbumViewHolder
 
-
 /***
- * A Simple Adapter for Display List of Album
+ * Adapter for Display List of Album
  */
-class AlbumsAdapter(): PagingDataAdapter<Album, AlbumViewHolder>(AlbumDiffer) {
+class AlbumsAdapter : PagingDataAdapter<Album, AlbumViewHolder>(AlbumDiffer) {
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): AlbumViewHolder {
@@ -27,26 +26,14 @@ class AlbumsAdapter(): PagingDataAdapter<Album, AlbumViewHolder>(AlbumDiffer) {
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val album = getItem(position)
-//        val album = albums[position]
         holder.titleTv.text = album?.title
 
        GlideApp.with(holder.itemView)
             .load(album?.url)
-            /*.listener(object: RequestListener<Drawable> {
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                    Log.e(TAG, "onLoadFailed ${e.toString()}")
-                    return false
-                }
-
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-//                    holder.img.setImageDrawable(resource)
-                    return false
-                }
-            } )*/
             .into(holder.img)
     }
 
-    inner class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class AlbumViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val titleTv: TextView = itemView.findViewById(R.id.title_tv)
         val img: ImageView = itemView.findViewById(R.id.img_iv)
     }
@@ -61,10 +48,5 @@ class AlbumsAdapter(): PagingDataAdapter<Album, AlbumViewHolder>(AlbumDiffer) {
             return oldItem == newItem
         }
     }
-
-    companion object {
-        val TAG = AlbumsAdapter::class.java.simpleName
-    }
-
 }
 

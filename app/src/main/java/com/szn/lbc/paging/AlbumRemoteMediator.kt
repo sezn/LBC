@@ -15,6 +15,9 @@ import com.szn.lbc.network.APIService
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+/**
+ * load data from a remote source into a local source wrapped by a PagingSource
+ */
 @OptIn(ExperimentalPagingApi::class)
 class AlbumRemoteMediator @Inject constructor(
     private val database: AppDatabase,
@@ -52,7 +55,6 @@ class AlbumRemoteMediator @Inject constructor(
 
             // Retrofit's Coroutine CallAdapter dispatches on a worker thread.
             val response = apiService.getAlbums().getOrNull()
-            Log.w("Mediator", "refresh $loadKey $loadType")
             if(response != null)
                 dataStoreManager.add(LAST_UPDATE, System.currentTimeMillis())
 
@@ -85,10 +87,10 @@ class AlbumRemoteMediator @Inject constructor(
         return if ((del < cacheTimeout) || !network)
         {
             //Need to refresh cached data
-            Log.e("Mediator", "No Need to refresh... $del < $cacheTimeout ")
+            Log.i("Mediator", "No Need to refresh... $del < $cacheTimeout ")
             InitializeAction.SKIP_INITIAL_REFRESH
         } else {
-            Log.e("Mediator", "Need to refresh... $del > $cacheTimeout ")
+            Log.i("Mediator", "Need to refresh... $del > $cacheTimeout ")
             // Cached data is up-to-date, so there is no need to re-fetch
             InitializeAction.LAUNCH_INITIAL_REFRESH
         }
