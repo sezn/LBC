@@ -26,7 +26,7 @@ The APIService and Room implementation share the same Album Object.
 At the beginning, the Repository call API if need, will load from Db if Datas is here and Fresh. 
 With the RemoteMediator implementation of PagingSource, this is this RemoteMediator who is responsible to Refresh or Not Datas when Override InitializeAction.
 
-The update will be when data has an hour, the last update TimeStamp is stock in DataStoreManager wich is a wrapper for DataStore <Preferences> .
+The update will be when data has an hour, the last update TimeStamp is stock in DataStoreManager wich is a wrapper for DataStore\<Preferences\> .
 
 # Notes Dev: 
 Because there is a lot of items, I tested with simple RecyclerView.Adapter at beginning. 
