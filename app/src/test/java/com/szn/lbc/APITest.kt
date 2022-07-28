@@ -26,7 +26,7 @@ class APITest {
     @Test
     fun testAlbumsLoaded(){
         runBlocking {
-            val albums = service.getAlbums().getOrThrow()
+            val albums = service.getAlbums()
             assert(albums.isNotEmpty())
             assert(albums.size > 10)
         }

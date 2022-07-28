@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.szn.lbc.BuildConfig
 import com.szn.lbc.network.APIService
-import com.szn.lbc.network.ResultCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,7 +35,6 @@ class ApiClient  {
             .baseUrl(BuildConfig.BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(ResultCallAdapterFactory())
             .build()
     }
 

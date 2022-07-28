@@ -54,7 +54,7 @@ class AlbumRemoteMediator @Inject constructor(
             }
 
             // Retrofit's Coroutine CallAdapter dispatches on a worker thread.
-            val response = apiService.getAlbums().getOrNull()
+            val response = apiService.getAlbums()
             if(response != null)
                 dataStoreManager.add(LAST_UPDATE, System.currentTimeMillis())
 
